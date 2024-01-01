@@ -33,7 +33,8 @@ class _ChatUiState extends State<ChatUi> {
     UserMessage(
         date: DateTime.now(),
         isSentByMe: false,
-        text: 'yewa mn yehonal belsdfsa'),
+        text:
+            'yewa mn yehonal belsdfsabelsdfsabelsdfsabelsdfsabelsdfsabelsdfsabelsdfsabelsdfsabelsdfsabelsdfsabelsdfsabelsdfsabelsdfsabelsdfsabelsdfsabelsdfsabelsdfsabelsdfsabelsdfsabelsdfsabelsdfsabelsdfsabelsdfsabelsdfsa'),
     UserMessage(
         date: DateTime.now(),
         isSentByMe: false,
@@ -91,7 +92,7 @@ class _ChatUiState extends State<ChatUi> {
                 height: 40,
                 child: Center(
                     child: Card(
-                  color: Theme.of(context).primaryColor,
+                  color: Color.fromRGBO(23, 191, 158, 1),
                   child: Padding(
                     padding: EdgeInsets.all(8),
                     child: Text(DateFormat.yMMMMd().format(message.date)),
@@ -112,33 +113,40 @@ class _ChatUiState extends State<ChatUi> {
                           backgroundColor: Colors.amber,
                           radius: 23,
                         ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      // elevation: 8,
-                      decoration: BoxDecoration(
-                        color: message.isSentByMe
-                            ? Color.fromRGBO(23, 191, 158, 1)
-                            : Color.fromRGBO(242, 247, 251, 1),
-                        borderRadius: message.isSentByMe
-                            ? BorderRadius.only(
-                                bottomLeft: Radius.circular(10),
-                                bottomRight: Radius.circular(10),
-                                topLeft: Radius.circular(10),
-                              )
-                            : BorderRadius.only(
-                                bottomLeft: Radius.circular(10),
-                                bottomRight: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                              ),
-                      ),
+                  Expanded(
+                    child: Align(
+                      alignment: message.isSentByMe
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
                       child: Padding(
-                        padding: EdgeInsets.all(12),
-                        child: Text(message.text,
-                            style: TextStyle(
-                                color: message.isSentByMe
-                                    ? Colors.white
-                                    : Colors.black)),
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          // elevation: 8,
+                          decoration: BoxDecoration(
+                            color: message.isSentByMe
+                                ? Color.fromRGBO(23, 191, 158, 1)
+                                : Color.fromRGBO(242, 247, 251, 1),
+                            borderRadius: message.isSentByMe
+                                ? BorderRadius.only(
+                                    bottomLeft: Radius.circular(10),
+                                    bottomRight: Radius.circular(10),
+                                    topLeft: Radius.circular(10),
+                                  )
+                                : BorderRadius.only(
+                                    bottomLeft: Radius.circular(10),
+                                    bottomRight: Radius.circular(10),
+                                    topRight: Radius.circular(10),
+                                  ),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(12),
+                            child: Text(message.text,
+                                style: TextStyle(
+                                    color: message.isSentByMe
+                                        ? Colors.white
+                                        : Colors.black)),
+                          ),
+                        ),
                       ),
                     ),
                   ),
