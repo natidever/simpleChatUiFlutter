@@ -37,7 +37,7 @@ class _ChatUiState extends State<ChatUi> {
     UserMessage(
         date: DateTime.now(),
         isSentByMe: false,
-        text: 'yewa mn yehonal belsdfsa'),
+        text: ' vyehonal yehonal yehonal  belsdfsa'),
     UserMessage(
         date: DateTime.now(),
         isSentByMe: false,
@@ -101,17 +101,37 @@ class _ChatUiState extends State<ChatUi> {
               elements: messageList,
               groupBy: (message) => DateTime(
                   message.date.year, message.date.month, message.date.day),
-              itemBuilder: (context, UserMessage message) => Align(
-                  alignment: message.isSentByMe
-                      ? Alignment.centerRight
-                      : Alignment.centerLeft,
-                  child: Padding(
+              itemBuilder: (context, UserMessage message) => Row(
+                mainAxisAlignment: message.isSentByMe
+                    ? MainAxisAlignment.end
+                    : MainAxisAlignment.start,
+                children: [
+                  message.isSentByMe
+                      ? Container()
+                      : CircleAvatar(
+                          backgroundColor: Colors.amber,
+                          radius: 23,
+                        ),
+                  Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
-                      color: message.isSentByMe
-                          ? Color.fromRGBO(23, 191, 158, 1)
-                          : Colors.white,
                       // elevation: 8,
+                      decoration: BoxDecoration(
+                        color: message.isSentByMe
+                            ? Color.fromRGBO(23, 191, 158, 1)
+                            : Color.fromRGBO(242, 247, 251, 1),
+                        borderRadius: message.isSentByMe
+                            ? BorderRadius.only(
+                                bottomLeft: Radius.circular(10),
+                                bottomRight: Radius.circular(10),
+                                topLeft: Radius.circular(10),
+                              )
+                            : BorderRadius.only(
+                                bottomLeft: Radius.circular(10),
+                                bottomRight: Radius.circular(10),
+                                topRight: Radius.circular(10),
+                              ),
+                      ),
                       child: Padding(
                         padding: EdgeInsets.all(12),
                         child: Text(message.text,
@@ -121,7 +141,9 @@ class _ChatUiState extends State<ChatUi> {
                                     : Colors.black)),
                       ),
                     ),
-                  )),
+                  ),
+                ],
+              ),
             )),
             Padding(
               padding: const EdgeInsets.all(30.0),
