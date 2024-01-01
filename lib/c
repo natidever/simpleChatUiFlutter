@@ -1,0 +1,19 @@
+child: Container(
+                  decoration: BoxDecoration(
+                    color: Color.fromRGBO(163, 167, 171, 1),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(15),
+                      bottomRight: Radius.circular(15),
+                      topRight: Radius.circular(15),
+                    ),
+                  ),
+                  child: Center(
+                      child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Text(
+                      message.text,
+                      softWrap: true,
+                      style: TextStyle(),
+                    ),
+                  )),
+                )
