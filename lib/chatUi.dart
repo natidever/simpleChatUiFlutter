@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:chatview/chatview.dart';
+
 import 'package:simplechatui/message.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
@@ -73,6 +73,8 @@ class _ChatUiState extends State<ChatUi> {
         isSentByMe: false,
         text: 'kemich kemirsdfsdf hskdj'),
   ];
+
+  String formateedTime = DateFormat('HH:mm').format(DateTime.now());
   TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -103,9 +105,9 @@ class _ChatUiState extends State<ChatUi> {
               groupBy: (message) => DateTime(
                   message.date.year, message.date.month, message.date.day),
               itemBuilder: (context, UserMessage message) => Row(
-                mainAxisAlignment: message.isSentByMe
-                    ? MainAxisAlignment.end
-                    : MainAxisAlignment.start,
+                // mainAxisAlignment: message.isSentByMe
+                //     ? MainAxisAlignment.end
+                //     : MainAxisAlignment.start,
                 children: [
                   message.isSentByMe
                       ? Container()
@@ -120,32 +122,57 @@ class _ChatUiState extends State<ChatUi> {
                           : Alignment.centerLeft,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          // elevation: 8,
-                          decoration: BoxDecoration(
-                            color: message.isSentByMe
-                                ? Color.fromRGBO(23, 191, 158, 1)
-                                : Color.fromRGBO(242, 247, 251, 1),
-                            borderRadius: message.isSentByMe
-                                ? BorderRadius.only(
-                                    bottomLeft: Radius.circular(10),
-                                    bottomRight: Radius.circular(10),
-                                    topLeft: Radius.circular(10),
-                                  )
-                                : BorderRadius.only(
-                                    bottomLeft: Radius.circular(10),
-                                    bottomRight: Radius.circular(10),
-                                    topRight: Radius.circular(10),
-                                  ),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(12),
-                            child: Text(message.text,
-                                style: TextStyle(
-                                    color: message.isSentByMe
-                                        ? Colors.white
-                                        : Colors.black)),
-                          ),
+                        child: Stack(
+                          children: [
+                            ConstrainedBox(
+                              constraints: BoxConstraints(minWidth: 90),
+                              child: Container(
+                                // elevation: 8,
+                                decoration: BoxDecoration(
+                                  color: message.isSentByMe
+                                      ? Color.fromRGBO(23, 191, 158, 1)
+                                      : Color.fromRGBO(242, 247, 251, 1),
+                                  borderRadius: message.isSentByMe
+                                      ? BorderRadius.only(
+                                          bottomLeft: Radius.circular(10),
+                                          bottomRight: Radius.circular(10),
+                                          topLeft: Radius.circular(10),
+                                        )
+                                      : BorderRadius.only(
+                                          bottomLeft: Radius.circular(10),
+                                          bottomRight: Radius.circular(10),
+                                          topRight: Radius.circular(10),
+                                        ),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(12),
+                                  child: Text(message.text,
+                                      style: TextStyle(
+                                          color: message.isSentByMe
+                                              ? Colors.white
+                                              : Colors.black)),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Positioned(
+                              bottom: 0,
+                              right: 10,
+                              child: Container(
+                                child: Text(
+                                  textAlign: TextAlign.right,
+                                  formateedTime,
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      color: message.isSentByMe
+                                          ? Colors.white
+                                          : Colors.black),
+                                ),
+                              ),
+                            )
+                          ],
                         ),
                       ),
                     ),
